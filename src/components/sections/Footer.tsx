@@ -71,7 +71,7 @@ export function Footer() {
         <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
             <p className="text-slate-400">&copy; 2025 CloudOps Fackop. Tous droits réservés.</p>
-            <p className="text-slate-500 text-sm">Designé et Développé par <span className="text-blue-400 font-medium">Fackop Studio</span></p>
+            <p className="text-slate-500 text-sm">Designé et Développé par <a href="https://fackop.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 font-medium hover:text-blue-300 transition-colors duration-300">Fackop Studio</a></p>
           </div>
           <div className="flex space-x-6 text-sm text-slate-400">
             <a href="#" className="hover:text-white transition-colors duration-300">Politique de confidentialité</a>
