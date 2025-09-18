@@ -31,7 +31,7 @@ export function BenefitsSection() {
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-semibold mb-6">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-            Avantages
+            <span>Avantages</span>
           </div>
           <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
             Pourquoi <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">CloudOps Fackop</span> ?
@@ -44,7 +44,7 @@ export function BenefitsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {benefits.map((benefit, index) => (
             <motion.div
-              key={index}
+              key={benefit}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}

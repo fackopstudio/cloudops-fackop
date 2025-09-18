@@ -28,17 +28,35 @@ export function ContactSection() {
     setSubmitStatus('idle')
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      console.log('Formulaire de contact soumis:', contactForm)
-      
-      setSubmitStatus('success')
-      setContactForm({
-        name: '',
-        email: '',
-        company: '',
-        subject: '',
-        message: ''
+      const formData = new FormData()
+      formData.append('access_key', 'eabc56f3-7a44-49d9-9638-501e279c4745')
+      formData.append('name', contactForm.name)
+      formData.append('email', contactForm.email)
+      formData.append('company', contactForm.company)
+      formData.append('subject', contactForm.subject)
+      formData.append('message', contactForm.message)
+      formData.append('from_name', 'CloudOps Fackop Contact Form')
+      formData.append('reply_to', contactForm.email)
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
       })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitStatus('success')
+        setContactForm({
+          name: '',
+          email: '',
+          company: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        throw new Error(result.message || 'Erreur lors de l\'envoi')
+      }
     } catch (error) {
       console.error('Erreur envoi formulaire:', error)
       setSubmitStatus('error')
@@ -69,7 +87,7 @@ export function ContactSection() {
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-6">
             <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-            Contact
+            <span>Contact</span>
           </div>
           <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6">
             Parlons de votre <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">projet</span>
@@ -148,10 +166,11 @@ export function ContactSection() {
               <form onSubmit={handleContactSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Nom complet *
                     </label>
                     <input
+                      id="name"
                       type="text"
                       value={contactForm.name}
                       onChange={(e) => handleContactChange('name', e.target.value)}
@@ -162,10 +181,11 @@ export function ContactSection() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Email *
                     </label>
                     <input
+                      id="email"
                       type="email"
                       value={contactForm.email}
                       onChange={(e) => handleContactChange('email', e.target.value)}
@@ -177,10 +197,11 @@ export function ContactSection() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                  <label htmlFor="company" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     Entreprise
                   </label>
                   <input
+                    id="company"
                     type="text"
                     value={contactForm.company}
                     onChange={(e) => handleContactChange('company', e.target.value)}
@@ -190,10 +211,11 @@ export function ContactSection() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                  <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     Sujet *
                   </label>
                   <input
+                    id="subject"
                     type="text"
                     value={contactForm.subject}
                     onChange={(e) => handleContactChange('subject', e.target.value)}
@@ -204,10 +226,11 @@ export function ContactSection() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     Message *
                   </label>
                   <textarea
+                    id="message"
                     value={contactForm.message}
                     onChange={(e) => handleContactChange('message', e.target.value)}
                     rows={5}

@@ -1,25 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { 
-  CloudIcon, 
-  RocketLaunchIcon, 
-  ServerIcon, 
-  ShieldCheckIcon,
-  ChartBarIcon,
-  CogIcon,
-  CheckCircleIcon,
   ArrowRightIcon,
-  PlayIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-  MapPinIcon,
-  PaperAirplaneIcon
+  PlayIcon
 } from '@heroicons/react/24/outline'
-import { useAuthStore } from '@/hooks/useAuthStore'
 import { useWaitlist } from '@/hooks/useWaitlist'
 import { Button } from '@/components/ui'
 import { FeaturesSection } from '@/components/sections/FeaturesSection'
@@ -29,107 +15,9 @@ import { ContactSection } from '@/components/sections/ContactSection'
 import { Footer } from '@/components/sections/Footer'
 
 export default function HomeMarketingPage() {
-  const router = useRouter()
-  const { isAuthenticated } = useAuthStore()
   const { scrollToContact } = useWaitlist()
   
-  // État pour le formulaire de contact
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    company: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-
-  // Gestion du formulaire de contact
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
-    try {
-      // Simulation d'envoi (remplacer par votre API)
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Ici vous pouvez ajouter l'appel à votre API
-      console.log('Formulaire de contact soumis:', contactForm)
-      
-      setSubmitStatus('success')
-      setContactForm({
-        name: '',
-        email: '',
-        company: '',
-        subject: '',
-        message: ''
-      })
-    } catch (error) {
-      console.error('Erreur envoi formulaire:', error)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleContactChange = (field: string, value: string) => {
-    setContactForm((prev: typeof contactForm) => ({ ...prev, [field]: value }))
-  }
-
-  const features = [
-    {
-      icon: ServerIcon,
-      title: "Infrastructure as Code",
-      description: "Provisionnement automatisé avec Terraform et Kubernetes",
-      color: "from-primary-100 to-primary-200 dark:from-primary-900/20 dark:to-primary-800/20",
-      iconColor: "text-primary-600 dark:text-primary-400"
-    },
-    {
-      icon: RocketLaunchIcon,
-      title: "CI/CD Pipeline",
-      description: "Déploiements automatisés avec Jenkins et Docker",
-      color: "from-success-100 to-success-200 dark:from-success-900/20 dark:to-success-800/20",
-      iconColor: "text-success-600 dark:text-success-400"
-    },
-    {
-      icon: CloudIcon,
-      title: "Multi-Cloud",
-      description: "Support AWS, Azure, GCP et DigitalOcean",
-      color: "from-info-100 to-info-200 dark:from-info-900/20 dark:to-info-800/20",
-      iconColor: "text-info-600 dark:text-info-400"
-    },
-    {
-      icon: ShieldCheckIcon,
-      title: "Sécurité Avancée",
-      description: "Authentification JWT, RBAC et audit complet",
-      color: "from-warning-100 to-warning-200 dark:from-warning-900/20 dark:to-warning-800/20",
-      iconColor: "text-warning-600 dark:text-warning-400"
-    },
-    {
-      icon: ChartBarIcon,
-      title: "Monitoring Intelligent",
-      description: "Prometheus, Grafana et alertes automatiques",
-      color: "from-purple-100 to-purple-200 dark:from-purple-900/20 dark:to-purple-800/20",
-      iconColor: "text-purple-600 dark:text-purple-400"
-    },
-    {
-      icon: CogIcon,
-      title: "Auto-Healing",
-      description: "Récupération automatique et scaling intelligent",
-      color: "from-rose-100 to-rose-200 dark:from-rose-900/20 dark:to-rose-800/20",
-      iconColor: "text-rose-600 dark:text-rose-400"
-    }
-  ]
-
-  const benefits = [
-    "Réduction de 80% du temps de déploiement",
-    "Gestion centralisée multi-cloud",
-    "Sécurité renforcée avec RBAC",
-    "Monitoring en temps réel",
-    "Support 24/7",
-    "Documentation complète"
-  ]
+  
 
   const stats = [
     { label: "Déploiements", value: "900+", suffix: "/mois" },
@@ -177,8 +65,8 @@ export default function HomeMarketingPage() {
                 onClick={scrollToContact} 
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold text-sm sm:text-base"
               >
-                <span className="hidden sm:inline">Rejoindre la liste d'attente</span>
-                <span className="sm:hidden">Liste d'attente</span>
+                <span className="hidden sm:inline">Rejoindre la liste d&apos;attente</span>
+                <span className="sm:hidden">Liste d&apos;attente</span>
               </Button>
             </div>
           </div>
@@ -221,10 +109,10 @@ export default function HomeMarketingPage() {
             </h1>
             
             <p className="text-xl md:text-2xl lg:text-3xl text-slate-600 dark:text-slate-300 max-w-5xl mx-auto leading-relaxed mb-8 font-light">
-              La plateforme <span className="font-semibold text-blue-600 dark:text-blue-400">self-service</span> pour 
-              <span className="font-semibold text-indigo-600 dark:text-indigo-400"> provisionner</span>, 
-              <span className="font-semibold text-purple-600 dark:text-purple-400"> déployer</span> et 
-              <span className="font-semibold text-pink-600 dark:text-pink-400"> monitorer</span> vos workloads multi-cloud
+              La plateforme <span className="font-semibold text-blue-600 dark:text-blue-400">self-service</span> pour{' '}
+              <span className="font-semibold text-indigo-600 dark:text-indigo-400">provisionner</span>,{' '}
+              <span className="font-semibold text-purple-600 dark:text-purple-400">déployer</span> et{' '}
+              <span className="font-semibold text-pink-600 dark:text-pink-400">monitorer</span> vos workloads multi-cloud
             </p>
             
             {/* Message de liste d'attente */}
@@ -236,7 +124,7 @@ export default function HomeMarketingPage() {
             >
               <span className="w-3 h-3 bg-blue-500 rounded-full mr-3 animate-pulse"></span>
               <span className="text-sm md:text-base font-semibold text-blue-700 dark:text-blue-300">
-                🚀 Bientôt disponible ! Rejoignez la liste d'attente pour être parmi les premiers
+                🚀 Bientôt disponible ! Rejoignez la liste d&apos;attente pour être parmi les premiers
               </span>
             </motion.div>
             
@@ -252,7 +140,7 @@ export default function HomeMarketingPage() {
                   className="bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-xl hover:shadow-2xl transform transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg border border-slate-200 dark:border-slate-700"
                 >
                   <span className="mr-3 text-xl">📧</span>
-                  Nous contacter
+                  <span>Nous contacter</span>
                 </Button>
               </motion.div>
               
@@ -266,7 +154,7 @@ export default function HomeMarketingPage() {
                   className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white shadow-2xl hover:shadow-3xl transform transition-all duration-300 px-8 py-4 rounded-2xl font-bold text-lg"
                 >
                   <span className="mr-3 text-xl">✨</span>
-                  Rejoindre la liste d'attente
+                  Rejoindre la liste d&apos;attente
                   <ArrowRightIcon className="w-5 h-5 ml-3" />
                 </Button>
               </motion.div>
@@ -299,7 +187,7 @@ export default function HomeMarketingPage() {
           >
             {stats.map((stat, index) => (
               <motion.div
-                key={index}
+                key={stat.label}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="text-center p-3 sm:p-4 md:p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-white/20 dark:border-slate-700/20 shadow-lg hover:shadow-xl transition-all duration-300 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col justify-center overflow-hidden"
               >

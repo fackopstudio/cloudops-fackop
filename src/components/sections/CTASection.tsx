@@ -63,7 +63,7 @@ export function CTASection() {
                 className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300"
               >
                 <span className="mr-3 text-xl">✨</span>
-                Rejoindre la liste d'attente
+                Rejoindre la liste d&apos;attente
               </Button>
             </motion.div>
           </div>

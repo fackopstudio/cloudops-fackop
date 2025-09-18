@@ -75,7 +75,7 @@ export function FeaturesSection() {
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-6">
             <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-            Fonctionnalités
+            <span>Fonctionnalités</span>
           </div>
           <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6">
             Outils <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">puissants</span>

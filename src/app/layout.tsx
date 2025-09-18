@@ -31,11 +31,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/cloud-ops-logo/cloud-ops-logo-blanc.png" type="image" />
+      </head>
       <body className={inter.className}>
         {children}
       </body>
