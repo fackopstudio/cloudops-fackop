@@ -3,6 +3,10 @@
 import Image from 'next/image'
 
 export function Footer() {
+  // Fonction pour rediriger vers le haut de la page
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
   return (
     <footer className="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Pattern */}
@@ -15,7 +19,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="flex items-center group">
+              <div 
+                className="flex items-center group cursor-pointer"
+                onClick={scrollToTop}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    scrollToTop()
+                  }
+                }}
+                aria-label="Retour en haut de la page"
+              >
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mr-3 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                   <Image 
                     src="/cloud-ops-logo/cloud-ops-logo-blanc.png" 

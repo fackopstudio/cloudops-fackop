@@ -17,7 +17,10 @@ import { Footer } from '@/components/sections/Footer'
 export default function HomeMarketingPage() {
   const { scrollToContact } = useWaitlist()
   
-  
+  // Fonction pour rediriger vers le haut de la page
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   const stats = [
     { label: "Déploiements", value: "900+", suffix: "/mois" },
@@ -33,7 +36,19 @@ export default function HomeMarketingPage() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="flex items-center group">
+              <div 
+                className="flex items-center group cursor-pointer"
+                onClick={scrollToTop}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    scrollToTop()
+                  }
+                }}
+                aria-label="Retour en haut de la page"
+              >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mr-2 sm:mr-3 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                   <Image 
                     src="/cloud-ops-logo/cloud-ops-logo-blanc.png" 
